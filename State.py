@@ -23,17 +23,18 @@ class State:
 
 	# Post: returns a higher-lower prediction
 	def getPrediction(self):
-		p1 = self.query[-1][-1]
-		p2 = self.query[-2][-1]
-		noise = random.randint(-5, 5)
-		return (p1 + p2)/2 + noise/100
+		p1 = float(self.query[-1][-1])
+		p2 = float(self.query[-2][-1])
+		noise = random.randint(-10, 10)
+		return (2*p1 - p2) + noise/100
+
 
  	# higher = true iff user predicted higher or equal
 	# Post: returns true iff answer is correct 
 	def checkAnswer(self, higher):
 		if higher:
-			return self.answer[-1] >= self.getPrediction()
-		return self.answer[-1] < self.getPrediction()
+			return float(self.answer[-1]) >= self.getPrediction()
+		return float(self.answer[-1]) < self.getPrediction()
 
 	# udpates the state
 	# Post: new query, gold updated depending on the answer
@@ -61,4 +62,12 @@ class State:
 		self.printSet(self.answer)
 		# -----
 		print("gold =\t", self.gold)
-		print("prediction = ", self.getPrediction())
+		print("prediction = ", toPrice(self.getPrediction()))
+
+
+
+
+# takes a float, and returns string with 2 decimal places
+def toPrice(f):
+    return "{:.2f}".format(f)
+     
