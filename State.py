@@ -2,12 +2,13 @@ import numpy as np
 import random
 
 class State:
-	def __init__(self, path, gold, categories):
+	def __init__(self, path, gold, categories, is_binary=False):
 		self.path = path
 		self.gold = gold
 		self.categories = categories
 		self.allQueries = np.load(path)
 		self.num_of_sets = 5
+		self.is_binary = is_binary
 		# 6 records in total
 		# 4 entries each, guessing the last one
 		self.nextQuery()
@@ -32,6 +33,10 @@ class State:
  	# higher = true iff user predicted higher or equal
 	# Post: returns true iff answer is correct 
 	def checkAnswer(self, higher):
+		if self.is_binary:
+			if higher:
+				return int(self.answer[-1]) == 1
+			return int(self.answer[-1]) == 0
 		if higher:
 			return float(self.answer[-1]) > self.getPrediction()
 		return float(self.answer[-1]) <= self.getPrediction()
@@ -51,7 +56,7 @@ class State:
 			print("    ", self.categories[i], " = ", set[i])
 	
 	# used for debugging
-	def printState(self, print_ans=True):
+	def printState(self):
 		print("------- State -------")
 		print("sets:")
 		# Printing sets
