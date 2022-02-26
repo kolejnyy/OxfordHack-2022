@@ -6,7 +6,7 @@ class State:
 		self.path = path
 		self.gold = gold
 		self.categories = categories
-		self.allQueries = np.load(path)
+		self.allQueries = np.load(path, allow_pickle=True)
 		self.num_of_sets = 5
 		self.is_binary = is_binary
 		# 6 records in total
@@ -24,6 +24,8 @@ class State:
 
 	# Post: returns a higher-lower prediction
 	def getPrediction(self):
+		if self.is_binary:
+			return 0.5
 		p1 = float(self.query[-1][-1])
 		p2 = float(self.query[-2][-1])
 		noise = random.randint(-10, 10)
@@ -37,6 +39,7 @@ class State:
 			if higher:
 				return int(self.answer[-1]) == 1
 			return int(self.answer[-1]) == 0
+
 		if higher:
 			return float(self.answer[-1]) > self.getPrediction()
 		return float(self.answer[-1]) <= self.getPrediction()
