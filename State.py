@@ -17,15 +17,16 @@ class State:
 	def nextQuery(self):
 		n = self.allQueries.shape[0]
 		q = self.allQueries[random.randint(0, n - 1)]
+		
 		self.query = q[:self.num_of_sets]
 		self.answer = q[self.num_of_sets]
 
 	# Post: returns a higher-lower prediction
 	def getPrediction(self):
-		p1 = self.query[-1]
-		p2 = self.query[-2]
+		p1 = self.query[-1][-1]
+		p2 = self.query[-2][-1]
 		noise = random.randint(-5, 5)
-		return 2*p1 - p2 + noise/100
+		return (p1 + p2)/2 + noise/100
 
  	# higher = true iff user predicted higher or equal
 	# Post: returns true iff answer is correct 
@@ -45,16 +46,16 @@ class State:
 		self.nextQuery()
 	
 	def printSet(self, set):
-		for i in len(set):
-			print("\t\t", self.categories[i], " = ", set[i])
+		for i in range(len(set)):
+			print("    ", self.categories[i], " = ", set[i])
 	
 	# used for debugging
 	def printState(self):
-		print("----- State -----")
+		print("------- State -------")
 		print("sets:")
 		# Printing sets
 		for i, q in enumerate(self.query):
-			print("\tset ", i)
+			print("  set ", i)
 			self.printSet(q)
 		print("answer set:")
 		self.printSet(self.answer)
