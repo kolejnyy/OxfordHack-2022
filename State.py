@@ -33,8 +33,8 @@ class State:
 	# Post: returns true iff answer is correct 
 	def checkAnswer(self, higher):
 		if higher:
-			return float(self.answer[-1]) >= self.getPrediction()
-		return float(self.answer[-1]) < self.getPrediction()
+			return float(self.answer[-1]) > self.getPrediction()
+		return float(self.answer[-1]) <= self.getPrediction()
 
 	# udpates the state
 	# Post: new query, gold updated depending on the answer
@@ -51,7 +51,7 @@ class State:
 			print("    ", self.categories[i], " = ", set[i])
 	
 	# used for debugging
-	def printState(self):
+	def printState(self, print_ans=True):
 		print("------- State -------")
 		print("sets:")
 		# Printing sets

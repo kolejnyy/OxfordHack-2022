@@ -2,11 +2,11 @@ from State import State
 import random
 import sys
 
-file_name = 'datasets/avocado/array.npy'
+file_name = 'datasets/water/water_sets.npy'
 if len(sys.argv) > 1:
     file_name = sys.argv[1]
 
-categories = ["date", "state", "type", "price"]
+categories = ["ph", "Hardness", "Conductivity", "Potability"]
 num_of_data_sets = 2200
 game_state = State(file_name, 1000, categories)
 
