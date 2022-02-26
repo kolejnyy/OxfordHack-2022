@@ -62,13 +62,13 @@ def nba_similiarity():
         result[i][num_of_vectors - 1] = x
         teammates = []
         minutes = []
-        for j in range(len(data)):
+        for j in range(N):
             if j == idx:
                 continue
             y = data[j]
-            if x[1] == y[1]:
+            if x[1] == y[1] and x[0] != y[0]:
                 teammates.append(y)
-            if abs(x[2] - y[2]) <= 4:
+            if abs(x[2] - y[2]) <= 4 and x[0] != y[0]:
                 minutes.append(y)
         random.shuffle(teammates)
         random.shuffle(minutes)
