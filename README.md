@@ -1,3 +1,3 @@
-# OxfordHack-2022
+# Avocado Jungle Game
 
 To start the game, run "game.py"
