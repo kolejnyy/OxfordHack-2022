@@ -1,2 +1,3 @@
-# oxfordhack-2022
-OxfordHack 2022 Competition
+# OxfordHack-2022
+
+To start the game, run "game.py"
